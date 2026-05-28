@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Container, Card, Form, Button, InputGroup } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Form,
+  Button,
+  InputGroup,
+  CardFooter,
+} from "react-bootstrap";
 
 export default function Calculator() {
   const VAT_RATE = 20;
@@ -8,6 +15,7 @@ export default function Calculator() {
   const [withoutVat, setWithoutVat] = useState("");
   const [vat, setVat] = useState("");
   const [isCalculated, setIsCalculated] = useState(true);
+  const [showResult, setShowResult] = useState(false);
 
   const handleCalculate = () => {
     if (withVat) {
@@ -118,6 +126,26 @@ export default function Calculator() {
               <InputGroup.Text>€</InputGroup.Text>
             </InputGroup>
           </Form.Group>
+
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <span className="fw-semibold">Покажи резултат</span>
+
+            <Form.Check
+              type="switch"
+              id="show-result-switch"
+              checked={showResult}
+              onChange={(e) => setShowResult(e.target.checked)}
+            />
+          </div>
+
+          <div style={{ minHeight: "35px" }} className="text-center mb-3">
+            {showResult && vat &&  (
+              <span className="px-3 py-2 rounded-pill bg-light border fw-semibold fs-5">
+                {(Number(vat) / 2).toFixed(2)} €
+              </span>
+            ) }
+            
+          </div>
 
           <Button
             variant={isCalculated ? "primary" : "danger"}
