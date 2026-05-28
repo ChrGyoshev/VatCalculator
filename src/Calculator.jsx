@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Card, Form, Button } from "react-bootstrap";
+import { Container, Card, Form, Button, InputGroup } from "react-bootstrap";
 
 export default function Calculator() {
   const VAT_RATE = 20;
@@ -7,6 +7,7 @@ export default function Calculator() {
   const [withVat, setWithVat] = useState("");
   const [withoutVat, setWithoutVat] = useState("");
   const [vat, setVat] = useState("");
+  const [isCalculated, setIsCalculated] = useState(true);
 
   const handleCalculate = () => {
     if (withVat) {
@@ -31,57 +32,102 @@ export default function Calculator() {
       setWithoutVat(base.toFixed(2));
       setWithVat(total.toFixed(2));
     }
+    setIsCalculated(false);
+  };
+
+  const resetCalculationButton = () => {
+    setIsCalculated(true);
   };
 
   return (
     <Container
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
+      fluid
+      className="d-flex justify-content-center align-items-center bg-light"
+      style={{ minHeight: "100dvh" }}
     >
-      <Card className="w-100" style={{ maxWidth: "420px" }}>
+      <Card
+        className="border-0 shadow-lg p-4"
+        style={{
+          width: "100%",
+          maxWidth: "430px",
+          borderRadius: "20px",
+        }}
+      >
         <Card.Body>
-          <h3 className="text-center mb-3">VAT Calculator</h3>
+          <div className="text-center mb-4">
+            <h2 className="fw-bold mb-1">Калкулатор ДДС</h2>
+            <p className="text-muted mb-0">Изчисляване на 20% ДДС</p>
+          </div>
 
           <Form.Group className="mb-3">
-            <Form.Label>Сума с ДДС</Form.Label>
-            <Form.Control
-              type="number"
-              value={withVat}
-              onChange={(e) => {
-                setWithVat(e.target.value);
-                setWithoutVat("");
-                setVat("");
-              }}
-            />
+            <Form.Label className="fw-semibold">Сума с ДДС</Form.Label>
+
+            <InputGroup>
+              <Form.Control
+                type="number"
+                placeholder="0.00"
+                value={withVat}
+                onChange={(e) => {
+                  setWithVat(e.target.value);
+                  setWithoutVat("");
+                  setVat("");
+                  resetCalculationButton();
+                }}
+                className="py-2"
+              />
+              <InputGroup.Text>€</InputGroup.Text>
+            </InputGroup>
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Сума без ДДС</Form.Label>
-            <Form.Control
-              type="number"
-              value={withoutVat}
-              onChange={(e) => {
-                setWithoutVat(e.target.value);
-                setWithVat("");
-                setVat("");
-              }}
-            />
+            <Form.Label className="fw-semibold">Сума без ДДС</Form.Label>
+
+            <InputGroup>
+              <Form.Control
+                type="number"
+                placeholder="0.00"
+                value={withoutVat}
+                onChange={(e) => {
+                  setWithoutVat(e.target.value);
+                  setWithVat("");
+                  setVat("");
+                  resetCalculationButton();
+                }}
+                className="py-2"
+              />
+              <InputGroup.Text>€</InputGroup.Text>
+            </InputGroup>
           </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>ДДС</Form.Label>
-            <Form.Control
-              type="number"
-              value={vat}
-              onChange={(e) => {
-                setVat(e.target.value);
-                setWithVat("");
-                setWithoutVat("");
-              }}
-            />
+          <Form.Group className="mb-4">
+            <Form.Label className="fw-semibold">ДДС</Form.Label>
+
+            <InputGroup>
+              <Form.Control
+                type="number"
+                placeholder="0.00"
+                value={vat}
+                onChange={(e) => {
+                  setVat(e.target.value);
+                  setWithVat("");
+                  setWithoutVat("");
+                  resetCalculationButton();
+                }}
+                className="py-2"
+              />
+              <InputGroup.Text>€</InputGroup.Text>
+            </InputGroup>
           </Form.Group>
 
-          <Button className="w-100" onClick={handleCalculate}>
+          <Button
+            variant={isCalculated ? "primary" : "danger"}
+            className="w-100 py-2 fw-semibold"
+            style={{
+              borderRadius: "12px",
+              fontSize: "1.05rem",
+            }}
+            onClick={handleCalculate}
+          >
             Изчисли
           </Button>
         </Card.Body>
