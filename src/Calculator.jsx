@@ -128,7 +128,9 @@ export default function Calculator() {
           </Form.Group>
 
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <span className="fw-semibold">Покажи резултат</span>
+            <span className="fw-semibold">
+               Фактури гориво <span className="">(ДДС / 2)</span>
+            </span>
 
             <Form.Check
               type="switch"
@@ -138,16 +140,12 @@ export default function Calculator() {
             />
           </div>
 
-          <div style={{ minHeight: "50px" }} className="text-center mb-3">
-            <span
-              className="px-3 py-2 rounded-pill bg-light border fw-semibold fs-5"
-              style={{
-                opacity: showResult && vat ? 1 : 0,
-                transition: "0.2s ease-in-out",
-              }}
-            >
-              {(Number(vat) / 2 || 0).toFixed(2)} €
-            </span>
+          <div style={{ minHeight: "80px" }} className="mb-3">
+            {showResult && vat && (
+              <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                {(Number(vat) / 2).toFixed(2)} €
+              </div>
+            )}
           </div>
 
           <Button
