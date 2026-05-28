@@ -138,13 +138,16 @@ export default function Calculator() {
             />
           </div>
 
-          <div style={{ minHeight: "35px" }} className="text-center mb-3">
-            {showResult && vat &&  (
-              <span className="px-3 py-2 rounded-pill bg-light border fw-semibold fs-5">
-                {(Number(vat) / 2).toFixed(2)} €
-              </span>
-            ) }
-            
+          <div style={{ minHeight: "50px" }} className="text-center mb-3">
+            <span
+              className="px-3 py-2 rounded-pill bg-light border fw-semibold fs-5"
+              style={{
+                opacity: showResult && vat ? 1 : 0,
+                transition: "0.2s ease-in-out",
+              }}
+            >
+              {(Number(vat) / 2 || 0).toFixed(2)} €
+            </span>
           </div>
 
           <Button
