@@ -15,3 +15,14 @@ body {
 .card {
   backdrop-filter: blur(10px);
 }
+
+
+.custom-switch .form-check-input {
+  transform: scale(1.2);
+}
+
+@media (max-width: 576px) {
+  .custom-switch {
+    transform: scale(1.6);
+  }
+}

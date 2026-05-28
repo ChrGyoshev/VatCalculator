@@ -129,10 +129,11 @@ export default function Calculator() {
 
           <div className="d-flex justify-content-between align-items-center mb-3">
             <span className="fw-semibold">
-               Фактури гориво <span className="">(ДДС / 2)</span>
+              Фактури гориво <span className="">(ДДС / 2)</span>
             </span>
 
             <Form.Check
+              className="custom-switch"
               type="switch"
               id="show-result-switch"
               checked={showResult}
