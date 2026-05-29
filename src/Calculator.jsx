@@ -164,16 +164,23 @@ export default function Calculator() {
               </Form.Select>
             )}
           </div>
+
           <div style={{ minHeight: "80px" }} className="mb-3">
-            {showResult && vat && companyName ? (
-              <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
-                {(Number(vat) / 2).toFixed(2)} €
-              </div>
-            ) : (
-              <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
-                {(Number(vat) / 2).toFixed(2)} basic€
-              </div>
-            )}
+            {showResult && vat ? (
+              companyName === "1" ? (
+                <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                  Ерик-94: {100 - (Number(vat) / 2).toFixed(2)} €
+                </div>
+              ) : companyName === "2" ? (
+                <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                  Озон: {(Number(vat) / 2).toFixed(2)} €
+                </div>
+              ) : (
+                <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                  Озон: {(Number(vat) / 2).toFixed(2)} €E
+                </div>
+              )
+            ) : null}
           </div>
 
           <Button
