@@ -16,6 +16,7 @@ export default function Calculator() {
   const [vat, setVat] = useState("");
   const [isCalculated, setIsCalculated] = useState(true);
   const [showResult, setShowResult] = useState(false);
+  const [companyName, setCompanyName] = useState(false);
 
   const handleCalculate = () => {
     if (withVat) {
@@ -141,6 +142,25 @@ export default function Calculator() {
             />
           </div>
 
+          <div
+            style={{ minHeight: "50px" }}
+            className="d-flex justify-content-between align-items-center mb-3"
+          >
+            {showResult && companyName !== "" && (
+              <Form.Select
+                aria-label="select input"
+                value={companyName}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setCompanyName(e.target.value);
+                }}
+              >
+                <option>Избери</option>
+                <option value="1">Ерик-94</option>
+                <option value="2">Озон</option>
+              </Form.Select>
+            )}
+          </div>
           <div style={{ minHeight: "80px" }} className="mb-3">
             {showResult && vat && (
               <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
