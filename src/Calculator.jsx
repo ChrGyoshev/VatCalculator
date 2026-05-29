@@ -16,7 +16,7 @@ export default function Calculator() {
   const [vat, setVat] = useState("");
   const [isCalculated, setIsCalculated] = useState(true);
   const [showResult, setShowResult] = useState(false);
-  const [companyName, setCompanyName] = useState(false);
+  const [companyName, setCompanyName] = useState("");
 
   const handleCalculate = () => {
     if (withVat) {
@@ -40,6 +40,9 @@ export default function Calculator() {
 
       setWithoutVat(base.toFixed(2));
       setWithVat(total.toFixed(2));
+    }
+    if (companyName !== "") {
+      console.log(companyName);
     }
     setIsCalculated(false);
   };
@@ -146,25 +149,29 @@ export default function Calculator() {
             style={{ minHeight: "50px" }}
             className="d-flex justify-content-between align-items-center mb-3"
           >
-            {showResult && companyName !== "" && (
+            {showResult && companyName !== " " && (
               <Form.Select
                 aria-label="select input"
                 value={companyName}
                 onChange={(e) => {
-                  console.log(e.target.value);
-                  setCompanyName(e.target.value);
+                  const value = e.target.value;
+                  setCompanyName(value);
                 }}
               >
-                <option>Избери</option>
+                <option value="">Избери</option>
                 <option value="1">Ерик-94</option>
                 <option value="2">Озон</option>
               </Form.Select>
             )}
           </div>
           <div style={{ minHeight: "80px" }} className="mb-3">
-            {showResult && vat && (
+            {showResult && vat && companyName ? (
               <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
                 {(Number(vat) / 2).toFixed(2)} €
+              </div>
+            ) : (
+              <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                {(Number(vat) / 2).toFixed(2)} basic€
               </div>
             )}
           </div>
