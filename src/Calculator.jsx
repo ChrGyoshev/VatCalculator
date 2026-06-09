@@ -141,7 +141,14 @@ export default function Calculator() {
               type="switch"
               id="show-result-switch"
               checked={showResult}
-              onChange={(e) => setShowResult(e.target.checked)}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setShowResult(checked);
+
+                if (!checked) {
+                  setCompanyName("");
+                }
+              }}
             />
           </div>
 
@@ -179,7 +186,11 @@ export default function Calculator() {
                 </div>
               ) : companyName === "3" ? (
                 <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
-                  Озон - Томпсън: {100 - (Number(vat) / 2).toFixed(2)} €E
+                  Озон - Томпсън: {100 - (Number(vat) / 2).toFixed(2)} €
+                </div>
+              ) : (
+                <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
+                  ДДС {(Number(vat) / 2).toFixed(2)}
                 </div>
               )
             ) : null}
