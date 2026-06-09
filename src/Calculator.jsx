@@ -160,7 +160,9 @@ export default function Calculator() {
               >
                 <option value="">Избери</option>
                 <option value="1">Ерик-94</option>
-                <option value="2">Озон</option>
+
+                <option value="2">Озон - Нови искър</option>
+                <option value="3">Озон - Томпсън</option>
               </Form.Select>
             )}
           </div>
@@ -173,11 +175,11 @@ export default function Calculator() {
                 </div>
               ) : companyName === "2" ? (
                 <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
-                  Озон: {(Number(vat) / 2).toFixed(2)} €
+                  Озон - Нови Искър: {80 - (Number(vat) / 2).toFixed(2)} €
                 </div>
-              ) : (
+              ) : companyName === "3" ? (
                 <div className="w-100 text-center py-2 rounded-4 bg-white border shadow-sm fw-semibold fs-4">
-                  Озон: {(Number(vat) / 2).toFixed(2)} €E
+                  Озон - Томпсън: {100 - (Number(vat) / 2).toFixed(2)} €E
                 </div>
               )
             ) : null}
